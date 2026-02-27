@@ -1,9 +1,13 @@
 import {test,expect} from '@playwright/test'
+import { LoginPage } from './commonAspects'
 
+let loginStart :LoginPage
 
 test.beforeEach(async({page})=>{
     await page.goto('https://www.saucedemo.com/')
+    loginStart = new LoginPage(page)
 })
+
 
 //testing website login
 
@@ -11,23 +15,18 @@ test.beforeEach(async({page})=>{
 test.describe ('login attempt',()=>{
     
     test('succesfull attempt',async({page})=>{
-        await page.getByPlaceholder ('Username'). fill('standard_user')
-        await page.getByPlaceholder ('Password'). fill('secret_sauce')
-        await page.getByText('Login').click()
+
+        await loginStart.login ('standard_user', 'secret_sauce')
         await expect(page).toHaveURL(/inventory/)
     })
 
     test('failure attempt from wrong user',async({page})=>{
-        await page.getByPlaceholder ('Username'). fill('daddr')
-        await page.getByPlaceholder ('Password'). fill('secret_sauce')
-        await page.getByText('Login').click()
+        await loginStart.login ('ldjhdg', 'secret_sauce')
         await expect(page.getByText('Epic sadface: Username and password do not match any user in this service')).toBeVisible()
     })
 
     test('failure attempt from wrong password',async({page})=>{
-        await page.getByPlaceholder ('Username'). fill('standard_user')
-        await page.getByPlaceholder ('Password'). fill('sjdha')
-        await page.getByText('Login').click()
+        await loginStart.login ('standard_user', '664744')
         await expect(page.getByText('Epic sadface: Username and password do not match any user in this service')).toBeVisible()
     })
 
