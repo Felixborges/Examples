@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "./Configs/commonAspects";
-import { NavigationPage } from "./Configs/automationExcersiceMethods";
+import { NavigationPage } from "./Configs/automationExcersiceNavigationMethods";
+import { UserCreationSite} from "./Configs/automationExecersiceUserCreation"
 
 
 test.describe('testBattery for this page',()=>{
@@ -11,10 +11,16 @@ test.describe('testBattery for this page',()=>{
     })
 
     test('creating a new user',async({page})=>{
-        const userCreation = new NavigationPage(page)
-        await userCreation.generateAndSaveUser()
-        await userCreation.LoginAndSingUpPage()
+        const userCreation = new UserCreationSite(page)
+        await userCreation.CreationofUserandFillingData()
+       
                 
+    })
+
+    test('login in with the freshly created user', async({page})=>{
+        const userLogin = new NavigationPage(page)
+        
+        await userLogin.loginAndSignUp()
     })
 })
 

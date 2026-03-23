@@ -13,7 +13,7 @@ export function randomGeneratedUserToSaveLater(){
     day: birthdate.getDate().toString(),
     month: (birthdate.getMonth() + 1).toString(),
     year: birthdate.getFullYear().toString(),
-
+    adress:faker.location.direction()
    
 }
      
