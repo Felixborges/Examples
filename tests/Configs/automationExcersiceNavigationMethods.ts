@@ -9,17 +9,13 @@ export class NavigationPage {
   readonly page: Page;
   
   // Deining nav methods of location
-  readonly homeLink: Locator;
-  readonly loginLink: Locator;
-  readonly profileLink: Locator;
-  readonly userMenu: Locator;
+  readonly homePage: Locator;
+  
 
   constructor(page: Page) {
     this.page = page;
-    this.homeLink = page.getByRole('link', { name: 'Home' });
-    this.loginLink = page.getByRole('link', { name: ' Signup / Login' });
-    this.profileLink = page.getByRole('link', { name: 'Mi Perfil' });
-    this.userMenu = page.locator('#user-menu')
+    this.homePage = page.getByRole('link', { name: 'Home' });
+    
   }
 
   async generateAndSaveUser(){
@@ -30,8 +26,13 @@ export class NavigationPage {
   
   // nevigation methods
   async gotoHome() {
-    await this.page.goto('https://automationexercise.com/');
-    await expect(this.homeLink).toBeVisible();
+    await this.page.goto('https://automationexercise.com/')
+    await expect(this.homePage).toBeVisible();
+  }
+
+  async gotoProducts() {
+    await this.page.getByRole('link',{ name: ' Products' }).click()
+    await expect(this.page).toHaveURL(/products/);
   }
 
   
@@ -39,7 +40,7 @@ export class NavigationPage {
   async loginAndSignUp() {
     const fakerUser = JSON.parse(fs.readFileSync('user.json', 'utf-8'));
     await this.page.getByRole("link",{ name: ' Signup / Login' }).click()
-    await expect(this.loginLink).toBeVisible();
+    await expect(this.page).toHaveURL(/login/);
     await this.page.locator('[data-qa="login-email"]').fill(fakerUser.email);
     await this.page.locator('[data-qa="login-password"]').fill(fakerUser.password);
     await this.page.getByRole('button', { name: 'Login' }).click()
