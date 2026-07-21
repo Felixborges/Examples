@@ -26,7 +26,7 @@ export class NavigationPage {
   
   // nevigation methods
   async gotoHome() {
-    await this.page.goto('https://automationexercise.com/')
+    await this.page.goto('https://automationexercise.com/',{ waitUntil: 'domcontentloaded' })
     await expect(this.homePage).toBeVisible();
   }
 

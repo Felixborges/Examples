@@ -1,10 +1,11 @@
 {
-  "firstName": "Cyril",
-  "lastName": "Gerhold",
-  "email": "Jo.Klein@test.com",
-  "phoneNumber": "+12593973864",
-  "password": "dcDBG5lWeOdE",
+  "firstName": "Mark",
+  "lastName": "Oberbrunner",
+  "email": "Shane_Schneider7@test.com",
+  "phoneNumber": "+14308987151",
+  "password": "BIDE10K7h_zI",
   "day": "1",
-  "month": "10",
-  "year": "1977"
+  "month": "9",
+  "year": "1960",
+  "adress": "Northwest"
 }

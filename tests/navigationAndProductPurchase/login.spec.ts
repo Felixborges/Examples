@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "./Configs/commonAspects";
+import { LoginPage } from "../Configs/commonAspects";
 
 let loginStart: LoginPage;
 
